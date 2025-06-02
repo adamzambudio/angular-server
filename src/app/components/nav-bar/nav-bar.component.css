@@ -1,0 +1,61 @@
+/* Importar una fuente similar a la del logo */
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap');
+
+/* Navbar general */
+.custom-navbar {
+  width: 100%;
+  background-color: white;
+  padding: 1rem 0;
+  font-family: 'Quicksand', sans-serif;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* Marca de la empresa */
+.custom-logo {
+  font-weight: 700;
+  font-size: 1.8rem;
+  color: #d80000;
+  font-family: 'Quicksand', sans-serif;
+}
+
+.custom-logo:hover {
+  color: #a80000;
+  text-decoration: none;
+}
+
+/* Ítems del menú */
+.custom-navbar .nav-link {
+  color: #333;
+  font-size: 17px;
+  padding: 8px 14px;
+  transition: color 0.3s;
+  font-weight: 500;
+}
+
+.custom-navbar .nav-link:hover {
+  color: #d80000;
+}
+
+.custom-navbar .contact-button:hover {
+  background-color: #a80000;
+}
+
+/* Botón hamburguesa */
+.custom-navbar .navbar-toggler {
+  border: none;
+}
+
+.custom-navbar .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3e%3cpath stroke='rgba%2830,30,30, 0.85%29' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+button {
+background-color: #c62828;
+  color: white;
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+button:hover {
+  background-color: #b81d2d;
+  box-shadow: 0 4px 10px rgb(88, 1, 1, 0.5);
+}

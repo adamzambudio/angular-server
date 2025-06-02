@@ -1,0 +1,41 @@
+<div class="card p-3 mb-4 filter-container">
+  <div class="row g-4 align-items-end justify-content-center">
+
+    <!-- Selección de Ciudad -->
+    <div class="col-md-2 form-group">
+      <label for="citySelect" class="form-label">Ciudad</label>
+      <select id="citySelect" class="form-select underline" [(ngModel)]="filters.city" (change)="onCityChange()">
+        <option value="">Todas</option>
+        <option *ngFor="let city of cities" [value]="city">{{ city }}</option>
+      </select>
+    </div>
+
+    <!-- Selección de Tipo -->
+    <div class="col-md-2 form-group">
+      <label for="typeSelect" class="form-label">Tipo</label>
+      <select id="typeSelect" class="form-select underline" [(ngModel)]="filters.type" (change)="onTypeChange()">
+        <option value="">Todos</option>
+        <option *ngFor="let type of types" [value]="type">{{ type }}</option>
+      </select>
+    </div>
+
+    <!-- Precio Mínimo -->
+    <div class="col-md-2 form-group">
+      <label for="minPrice" class="form-label">Precio mínimo (€)</label>
+      <input type="number" id="minPrice" class="form-control underline" [(ngModel)]="filters.min" [min]="0" [max]="filters.max !== null ? filters.max : null" />
+    </div>
+
+    <!-- Precio Máximo -->
+    <div class="col-md-2 form-group">
+      <label for="maxPrice" class="form-label">Precio máximo (€)</label>
+      <input type="number" id="maxPrice" class="form-control underline" [(ngModel)]="filters.max" [min]="filters.min !== null ? filters.min : 0" />
+    </div>
+
+    <!-- Botones -->
+    <div class="col-md-3 d-flex align-items-center justify-content-start mt-3">
+      <button class="btn red me-3 shadow-btn" (click)="applyFilters()">Aplicar filtros</button>
+      <button type="button" class="btn black shadow-btn" (click)="resetFilters()">Borrar filtros</button>
+    </div>
+
+  </div>
+</div>

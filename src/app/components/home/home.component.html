@@ -1,0 +1,23 @@
+<div class="container-fluid mt-5 mb-5">
+  
+  <!-- Componente filtro: emite propiedades filtradas -->
+  <app-property-filter (propertiesFiltered)="onPropertiesFiltered($event)"></app-property-filter><br><br>
+
+  <h2 class="section-title text-center">Ofertas de inmuebles en venta</h2>
+
+  <div *ngIf="!properties.length" class="alert alert-info text-center">No se encontraron propiedades.</div>
+
+  <div class="properties-grid">
+    @for (p of properties; track $index) {
+      <div class="card property-card">
+        <img [src]="p.image[0]" class="card-img-top" alt="Propiedad">
+        <div class="card-body">
+          <h5 class="card-title">{{ p.title }}</h5>
+          <p class="card-text">{{ p.description }}</p>
+          <p class="card-price">{{ p.price }}€</p>
+          <a class="btn btn-details" [routerLink]="['/property', p.id]">Ver más</a>
+        </div>
+      </div>
+    }
+  </div>
+</div>
