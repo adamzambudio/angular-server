@@ -18,6 +18,7 @@
           <p class="card-text">{{ p.description }}</p>
           <p class="card-price">{{ p.price }}€</p>
           <a class="btn btn-details" [routerLink]="['/property', p.id]">Ver más</a>
+          <button *ngIf="authService.isAdmin()">Administrar propiedades</button>
         </div>
       </div>
     }

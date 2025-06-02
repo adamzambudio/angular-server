@@ -15,15 +15,18 @@ export class LoginComponent {
   password = '';
   errorMessage = '';
 
-  constructor(private authService: AuthService, private router: Router, private route: ActivatedRoute) {}
-
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   onLogin(): void {
     this.authService.login(this.email, this.password).subscribe({
       next: (res) => {
-        this.authService.saveToken(res.token);
+        // Ya se guardan en el servicio internamente
         const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl') || '/dashboard';
-        this.router.navigate([returnUrl]); // Redirige a donde quieras
+        this.router.navigate([returnUrl]);
       },
       error: () => {
         this.errorMessage = 'Usuario o contraseña incorrectos';
