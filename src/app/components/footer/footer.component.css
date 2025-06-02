@@ -1,0 +1,33 @@
+p {
+    font-family: 'Quicksand', sans-serif;
+}
+
+footer.footer {
+  background-color: #1a1a1a; /* más profundo que el gris oscuro por defecto */
+  color: white;
+  transition: background-color 0.3s ease;
+}
+
+footer.footer a:hover {
+  color: #ff4d4d; /* rojo suave al pasar el ratón */
+  transition: color 0.3s ease;
+}
+
+.social-icon i {
+  font-size: 1.2rem;
+  transition: transform 0.3s ease;
+}
+
+.social-icon:hover i {
+  transform: scale(1.2);
+  color: #ff4d4d;
+}
+
+#scrollTopBtn {
+  transition: background-color 0.3s ease;
+}
+
+#scrollTopBtn:hover {
+  background-color: #ff4d4d;
+  color: white;
+}

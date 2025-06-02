@@ -10,6 +10,7 @@ export interface Property {
   city: string;
   type: string;
   cp: number;
+  image: [];
 }
 
 @Injectable({ providedIn: 'root' })

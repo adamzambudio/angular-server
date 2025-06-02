@@ -16,12 +16,13 @@ app-property-filter {
 .properties-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-  gap: 50px;
+  gap: 20px;
 }
 
 .property-card {
   background-color: #fff;
   border-radius: 16px;
+  width: 100%;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   overflow: hidden;
@@ -40,14 +41,9 @@ app-property-filter {
   object-fit: cover;
 }
 
-.card-body {
-  padding: 20px;
-}
-
 .card-title {
   font-size: 1.2rem;
   color: #b30000;
-  margin-bottom: 0.75rem;
   font-weight: 600;
   margin-bottom: 10px;
 }
@@ -70,6 +66,15 @@ app-property-filter {
   width: 400px;
   margin: 0 auto;
   
+}
+
+.clickable-img {
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.clickable-img:hover {
+  opacity: 0.9;
 }
 
 .btn-details {

@@ -1,3 +1,33 @@
-<footer class="bg-dark text-white text-center py-3 mt-5">
-  <p>&copy; 2025 Inmobiliaria. Todos los derechos reservados.</p>
+<footer class="footer bg-dark text-white mt-5 pt-4 pb-4">
+  <div class="container text-center text-md-start">
+    <div class="row align-items-center">
+      <!-- Logo y nombre -->
+      <div class="col-md-4 mb-3 mb-md-0 d-flex align-items-center justify-content-center justify-content-md-start">
+        <img src="assets/CECc.png" alt="Logo Como En Casa" width="100" height="100" class="me-2" />
+      </div>
+
+      <!-- Texto legal -->
+      <div class="col-md-4 mb-3 mb-md-0 text-center">
+        <p class="mb-1">&copy; 2025 Como En Casa. Todos los derechos reservados.</p>
+        <a href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank" class="text-white small">
+          Licencia CC BY-SA 4.0
+        </a>
+      </div>
+
+      <!-- Redes sociales -->
+      <div class="col-md-4 text-center text-md-end">
+        <a href="https://facebook.com" target="_blank" class="text-white mx-2 social-icon"><i class="bi bi-facebook"></i></a>
+        <a href="https://twitter.com" target="_blank" class="text-white mx-2 social-icon"><i class="bi bi-twitter"></i></a>
+        <a href="https://instagram.com" target="_blank" class="text-white mx-2 social-icon"><i class="bi bi-instagram"></i></a>
+        <a href="https://linkedin.com" target="_blank" class="text-white mx-2 social-icon"><i class="bi bi-linkedin"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Botón subir arriba -->
+  <div class="text-center mt-3">
+    <button (click)="scrollToTop()" class="btn btn-outline-light btn-sm rounded-circle">
+      <i class="bi bi-arrow-up"></i>
+    </button>
+  </div>
 </footer>

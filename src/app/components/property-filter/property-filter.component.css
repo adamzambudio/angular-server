@@ -59,8 +59,8 @@ button {
 }
 
 .red:hover {
-  background-color: #b81d2d;
-  box-shadow: 0 4px 10px rgb(88, 1, 1, 0.5);
+  background-color: #b11b2a;
+  box-shadow: 0 4px 8px rgb(88, 1, 1, 0.5);
 }
 
 .black {

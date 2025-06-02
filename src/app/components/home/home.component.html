@@ -10,7 +10,9 @@
   <div class="properties-grid">
     @for (p of properties; track $index) {
       <div class="card property-card">
-        <img [src]="p.image[0]" class="card-img-top" alt="Propiedad">
+        <a [routerLink]="['/property', p.id]">
+          <img [src]="p.image[0]" class="clickable-img" alt="Foto de la Propiedad">
+        </a>
         <div class="card-body">
           <h5 class="card-title">{{ p.title }}</h5>
           <p class="card-text">{{ p.description }}</p>
