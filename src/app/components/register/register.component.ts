@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
   selector: 'app-register',
   imports: [FormsModule, CommonModule],
   templateUrl: './register.component.html',
-  styles: ``
+  styleUrl: './register.component.css'
 })
 export class RegisterComponent {
   name = '';
@@ -24,8 +24,8 @@ export class RegisterComponent {
         this.authService.saveToken(res.token);
         this.router.navigate(['/dashboard']);
       },
-      error: () => {
-        this.errorMessage = 'Error en el registro';
+      error: (err) => {
+        this.errorMessage = err.error?.message || 'Error en el registro';
       }
     });
   }

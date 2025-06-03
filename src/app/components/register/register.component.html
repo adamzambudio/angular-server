@@ -1,24 +1,30 @@
-<div class="login-form">
-    <h2>Crear Cuenta</h2>
+<form (ngSubmit)="onRegister()">
+  <h1>Crear Cuenta</h1>
 
-    <form (ngSubmit)="onRegister()">
-        <div>
-            <label>Nombre:</label>
-            <input type="text" [(ngModel)]="name" name="name" required />
-        </div>
-        
-        <div>
-            <label>Email:</label>
-            <input type="email" [(ngModel)]="email" name="email" required />  
-        </div>
-        
-        <div>
-            <label>Contraseña:</label>
-            <input type="password" [(ngModel)]="password" name="password" required />    
-        </div>
-        
-        <button type="submit">Registrar</button>    
-    </form>
-    
-    <p *ngIf="errorMessage" style="color: red;">{{ errorMessage }}</p>
-</div>
+  <p style="color: red;">(Datos obligatorios) *</p>
+
+  <div class="form-body">
+    <label for="name">Escribe tu nombre completo: <span class="required">*</span></label>
+    <input type="text" id="name" name="name" [(ngModel)]="name" required maxlength="15" />
+  </div>
+
+  <div class="form-body">
+    <label for="email">Correo electrónico: <span class="required">*</span></label>
+    <span style="color: rgb(91, 32, 255); font-size: 13px;">(ejemplo: correo&#64;dominio.com)</span>
+    <input type="email" id="email" name="email" [(ngModel)]="email" required />
+  </div>
+
+  <div class="form-body">
+    <label for="password">Contraseña: <span class="required">*</span></label>
+    <span style="color: rgb(91, 32, 255); font-size: 13px;">(mínimo 8 caracteres, 1 mayúscula y 1 número)</span>
+    <input type="password" id="password" name="password" [(ngModel)]="password" required />
+  </div>
+
+  <div class="form-actions">
+    <button type="submit">Registrar</button>
+  </div>
+
+  <div *ngIf="errorMessage" style="color: red; margin-top: 10px;">
+    {{ errorMessage }}
+  </div>
+</form>
