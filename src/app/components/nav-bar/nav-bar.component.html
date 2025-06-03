@@ -26,6 +26,9 @@
         <li *ngIf="!authService.isLoggedIn()">
           <button (click)="goToLogin()">Iniciar sesión</button>
         </li>
+        <li *ngIf="!authService.isLoggedIn()">
+          <button (click)="goToRegister()">Crear Cuenta</button>
+        </li>
         <li *ngIf="authService.isLoggedIn()">
           <button (click)="logout()">Cerrar Sesión</button>
         </li>

@@ -82,4 +82,9 @@ export class AuthService {
       return null;
     }
   }
+
+  register(name: string, email: string, password: string) {
+    return this.http.post<any>('http://localhost:8000/api/register', { name, email, password });
+  }
+
 }

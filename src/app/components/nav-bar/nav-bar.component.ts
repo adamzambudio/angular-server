@@ -23,6 +23,10 @@ export class NavBarComponent {
     this.router.navigate(['/login']);
   }
 
+  goToRegister(): void {
+    this.router.navigate(['/register']);
+  }
+
   goToProfile(): void {
     this.router.navigate(['/profile']); // Cambia la ruta si tienes otro componente
   }
