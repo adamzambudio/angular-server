@@ -37,5 +37,17 @@
       <button type="button" class="btn black shadow-btn" (click)="resetFilters()">Borrar filtros</button>
     </div>
 
+    <!-- Mensaje de filtros aplicados -->
+    <div *ngIf="applyMessage" class="apply-message text-success animated d-flex align-items-center gap-2">
+      <i class="bi bi-search text-success fs-4"></i>
+      <span>{{ applyMessage }}</span>
+    </div>
+
+    <!-- Mensaje de borrado de filtros -->
+    <div *ngIf="resetMessage" class="reset-message animated text-danger">
+      <i class="bi bi-check-circle-fill text-danger me-2"></i>
+      {{ resetMessage }}
+    </div>
+
   </div>
 </div>

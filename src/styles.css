@@ -10,6 +10,7 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  padding-top: 40px; /* Ajusta según la altura de tu navbar */
 }
 
 app-root {
@@ -20,6 +21,7 @@ app-root {
 
 main {
   flex: 1;
+  padding-top: 40px; /* o el alto exacto del navbar */
 }
 
 .container {

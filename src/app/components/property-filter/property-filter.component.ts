@@ -13,6 +13,9 @@ export class PropertyFilterComponent implements OnInit {
   
   @Output() propertiesFiltered = new EventEmitter<Property[]>();
 
+  resetMessage: string | null = null;
+  applyMessage: string | null = null;
+
   
   cities: string[] = [];
   types: string[] = [];
@@ -67,6 +70,8 @@ export class PropertyFilterComponent implements OnInit {
     });
   }
 
+  
+
   applyFilters() {
     // Construimos el objeto filtros sin enviar valores vacíos
     const filters: any = {};
@@ -78,7 +83,14 @@ export class PropertyFilterComponent implements OnInit {
     this.propertyService.getProperties(filters).subscribe((properties: Property[]) => {
       this.propertiesFiltered.emit(properties); // Emitir lista filtrada
     });
+
+    this.resetMessage = null; // Ocultar mensaje anterior
+    // Mostrar mensaje temporal
+    this.applyMessage = 'Filtros aplicados';
+    setTimeout(() => this.applyMessage = null, 2000);
   }
+
+
 
   resetFilters(): void {
   this.filters = {
@@ -87,7 +99,18 @@ export class PropertyFilterComponent implements OnInit {
     min: null,
     max: null
   };
+  this.loadTypes();       // ← Cargar todos los tipos disponibles sin ciudad
   this.applyFilters();
+
+  // Mostramos mensaje
+  this.resetMessage = 'Filtros borrados';
+
+
+  this.applyMessage = null; // Ocultar mensaje anterior
+  // Ocultamos mensaje tras 2.5 segundos
+  setTimeout(() => {
+    this.resetMessage = null;
+  }, 2000);
 }
 
 }
