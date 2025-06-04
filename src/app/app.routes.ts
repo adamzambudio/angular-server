@@ -6,6 +6,7 @@ import { PropertyDetailComponent } from './components/property-detail/property-d
 import { ContactComponent } from './components/contact/contact.component';
 import { AboutComponent } from './components/about/about.component';
 import { RegisterComponent } from './components/register/register.component';
+import { PropertyEditComponent } from './components/property-edit/property-edit.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -14,6 +15,7 @@ export const routes: Routes = [
   { path: 'contact', component: ContactComponent },
   { path: 'property/:id', component: PropertyDetailComponent },
   { path: 'about', component: AboutComponent },
+    { path: 'propertyEdit/:id', component: PropertyEditComponent },
   { path: '**', component: HomeComponent }
 ];
 

@@ -1,10 +1,11 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 export interface Property {
   id: number;
   title: string;
+  address?: string; // poner opcional si puede ser null
   description: string;
   price: number;
   city: string;
@@ -12,6 +13,7 @@ export interface Property {
   cp: number;
   image: [];
 }
+
 
 @Injectable({ providedIn: 'root' })
 export class PropertyService {
@@ -33,11 +35,14 @@ export class PropertyService {
     return this.http.get<Property[]>('http://localhost:8000/get_properties.php', { params });
   }
 
-
-
-  getPropertyById(id: number) {
-    return this.http.get(`http://localhost:8000/get_properties_by_id.php?id=${id}`);
+getPropertyById(id: number, token?: string): Observable<Property> {
+  let headers = new HttpHeaders();
+  if (token) {
+    headers = headers.set('Authorization', `Bearer ${token}`);
   }
+  return this.http.get<Property>(`${this.baseUrl}/${id}`, { headers });
+}
+
 
   getCities(): Observable<string[]> {
     return this.http.get<string[]>(`${this.baseUrl}/cities`);
@@ -57,4 +62,14 @@ export class PropertyService {
     if (type) params = params.set('type', type);
     return this.http.get<{ min: number; max: number }>(`${this.baseUrl}/prices`, { params });
   }
+
+updateProperty(property: Property, token: string): Observable<Property> {
+  const headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${token}`
+  });
+
+  return this.http.put<Property>(`https://localhost:8000/api/properties/${property.id}`, property, { headers });
+}
+  
 }
