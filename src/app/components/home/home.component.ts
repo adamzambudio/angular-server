@@ -21,13 +21,13 @@ export class HomeComponent implements OnInit {
     public authService: AuthService
   ) {}
 
-ngOnInit(): void {
-  this.isAdmin = this.authService.isAdmin();
-  this.loadProperties();
+  ngOnInit(): void {
+    this.isAdmin = this.authService.isAdmin();
+    this.loadProperties();
     if (this.authService.isAdmin()) {
-    console.log('Usuario administrador');
+      console.log('Usuario administrador');
+    }
   }
-}
 
   loadProperties() {
     this.propertyService.getProperties().subscribe((res: Property[]) => {

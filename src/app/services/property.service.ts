@@ -35,13 +35,13 @@ export class PropertyService {
     return this.http.get<Property[]>('http://localhost:8000/get_properties.php', { params });
   }
 
-getPropertyById(id: number, token?: string): Observable<Property> {
-  let headers = new HttpHeaders();
-  if (token) {
-    headers = headers.set('Authorization', `Bearer ${token}`);
+  getPropertyById(id: number, token?: string): Observable<Property> {
+    let headers = new HttpHeaders();
+    if (token) {
+      headers = headers.set('Authorization', `Bearer ${token}`);
+    }
+    return this.http.get<Property>(`${this.baseUrl}/${id}`, { headers });
   }
-  return this.http.get<Property>(`${this.baseUrl}/${id}`, { headers });
-}
 
 
   getCities(): Observable<string[]> {
@@ -63,13 +63,13 @@ getPropertyById(id: number, token?: string): Observable<Property> {
     return this.http.get<{ min: number; max: number }>(`${this.baseUrl}/prices`, { params });
   }
 
-updateProperty(property: Property, token: string): Observable<Property> {
-  const headers = new HttpHeaders({
-    'Content-Type': 'application/json',
-    'Authorization': `Bearer ${token}`
-  });
+  updateProperty(property: Property, token: string): Observable<Property> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
 
-  return this.http.put<Property>(`https://localhost:8000/api/properties/${property.id}`, property, { headers });
-}
+    return this.http.put<Property>(`https://localhost:8000/api/properties/${property.id}`, property, { headers });
+  }
   
 }

@@ -9,20 +9,27 @@
 
   <div class="properties-grid">
     @for (p of properties; track $index) {
-      <div class="card property-card">
+    <div class="card property-card">
+      <div class="property-image-wrapper">
         <a [routerLink]="['/property', p.id]">
           <img [src]="p.image[0]" class="clickable-img" alt="Foto de la Propiedad">
         </a>
-        <div class="card-body">
-          <h5 class="card-title">{{ p.title }}</h5>
-          <p class="card-text">{{ p.description }}</p>
-          <p class="card-price">{{ p.price }}€</p>
-          <a class="btn btn-details" [routerLink]="['/property', p.id]">Ver más</a>
-<a *ngIf="authService.isAdmin()" class="btn btn-warning" [routerLink]="['/propertyEdit', p.id]">
-  Administrar propiedades
-</a>
-        </div>
+        <div class="favorite-icon">♡</div>
       </div>
+  
+      <div class="card-body">
+        <h5 class="card-title">{{ p.title }}</h5>
+        <p class="card-text">{{ p.city }}</p>
+        <p class="card-text">{{ p.address }}</p>
+        <p class="card-price">{{ p.price | number:'1.0-0' }} €</p>
+  
+        <a class="btn btn-details" [routerLink]="['/property', p.id]">Ver más</a>
+  
+        <a *ngIf="authService.isAdmin()" class="btn btn-warning mt-2" [routerLink]="['/propertyEdit', p.id]">
+          Editar propiedad
+        </a>
+      </div>
+    </div>
     }
   </div>
 </div>

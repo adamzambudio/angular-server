@@ -67,12 +67,6 @@ button {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.property-card img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 6px;
-}
-
 /* Estilo para el detalle */
 .property-detail {
   max-width: 1000px;
