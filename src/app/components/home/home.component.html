@@ -8,20 +8,23 @@
   <div *ngIf="!properties.length" class="alert alert-info text-center">No se encontraron propiedades.</div>
 
   <div class="properties-grid">
-    @for (p of properties; track $index) {
+    <div *ngFor="let p of properties; let i = index; trackBy: trackByIndex">
     <div class="card property-card">
       <div class="property-image-wrapper">
         <a [routerLink]="['/property', p.id]">
           <img [src]="p.image[0]" class="clickable-img" alt="Foto de la Propiedad">
         </a>
-        <div class="favorite-icon">♡</div>
+        <div class="favorite-icon" (click)="toggleFavorite(p)">
+          <i class="bi" [ngClass]="p.isFavorite ? 'bi-heart-fill' : 'bi-heart'"></i>
+        </div>
+
       </div>
   
-      <div class="card-body">
+      <div class="card-body text-center">
         <h5 class="card-title">{{ p.title }}</h5>
         <p class="card-text">{{ p.city }}</p>
         <p class="card-text">{{ p.address }}</p>
-        <p class="card-price">{{ p.price | number:'1.0-0' }} €</p>
+        <div class="price-box">{{ p.price | formatoPrecio }}</div>
   
         <a class="btn btn-details" [routerLink]="['/property', p.id]">Ver más</a>
   
@@ -30,6 +33,6 @@
         </a>
       </div>
     </div>
-    }
+    </div>
   </div>
 </div>

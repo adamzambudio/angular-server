@@ -5,10 +5,11 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { PropertyFilterComponent } from '../property-filter/property-filter.component';
 import { AuthService } from '../../services/auth.service';
+import { FormatoPrecioPipe } from '../../pipes/formato-precio.pipe';
 
 @Component({
   selector: 'app-home',
-  imports: [FormsModule, RouterModule, CommonModule, PropertyFilterComponent],
+  imports: [FormsModule, RouterModule, CommonModule, PropertyFilterComponent, FormatoPrecioPipe],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
@@ -39,7 +40,14 @@ export class HomeComponent implements OnInit {
     this.properties = filteredProperties;
   }
 
+  toggleFavorite(property: any): void {
+    property.isFavorite = !property.isFavorite;
+  }
 
+
+  trackByIndex(index: number, item: any): number {
+    return index;
+  }
 
 
 }
