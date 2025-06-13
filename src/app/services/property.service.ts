@@ -11,7 +11,7 @@ export interface Property {
   city: string;
   type: string;
   cp: number;
-  image: [];
+  images: [];
 }
 
 
@@ -32,7 +32,7 @@ export class PropertyService {
       if (filters.max !== undefined) params = params.set('max', filters.max.toString());
     }
 
-    return this.http.get<Property[]>('http://localhost:8000/get_properties.php', { params });
+    return this.http.get<Property[]>('http://localhost:8000/api/properties', { params });
   }
 
   getPropertyById(id: number, token?: string): Observable<Property> {
@@ -69,7 +69,7 @@ export class PropertyService {
       'Authorization': `Bearer ${token}`
     });
 
-    return this.http.put<Property>(`https://localhost:8000/api/properties/${property.id}`, property, { headers });
+    return this.http.put<Property>(`http://localhost:8000/api/properties/${property.id}`, property, { headers });
   }
   
 }

@@ -18,7 +18,7 @@ export class PropertyEditComponent implements OnInit {
     city: '',
     type: '',
     cp: 0,
-    image: []
+    images: []
   };
 
   constructor(

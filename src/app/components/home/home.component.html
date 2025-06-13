@@ -12,7 +12,7 @@
     <div class="card property-card">
       <div class="property-image-wrapper">
         <a [routerLink]="['/property', p.id]">
-          <img [src]="p.image[0]" class="clickable-img" alt="Foto de la Propiedad">
+          <img [src]="p.images[0]" class="clickable-img" alt="Foto de la Propiedad">
         </a>
         <div class="favorite-icon" (click)="toggleFavorite(p)">
           <i class="bi" [ngClass]="p.isFavorite ? 'bi-heart-fill' : 'bi-heart'"></i>
