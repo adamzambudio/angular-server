@@ -1,7 +1,73 @@
-<div class="container mt-5">
-  <h2>Sobre Nosotros</h2>
-  <p>
-    Somos una empresa dedicada a la venta y alquiler de propiedades. 
-    Nuestro objetivo es conectar a compradores y vendedores de manera sencilla y segura.
-  </p>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Como En Casa - Inmobiliaria</title>
+  
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Google Fonts: Poppins -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+    }
+    .about-section {
+      background-color: #f8f9fa;
+      padding: 20px 20px;
+    }
+    .about-logo {
+      max-width: 300px;
+    }
+    .highlight {
+      color: #d80000;
+      font-weight: bold;
+    }
+    a {
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+      text-decoration-color: #d80000;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container about-section text-center">
+  <!-- Logo -->
+  <img src="assets/CECc.png" alt="Logo Como En Casa" class="about-logo mb-4">
+
+  <!-- Título -->
+  <h1 class="mb-4">Bienvenido a <span class="highlight">Como En Casa</span></h1>
+
+  <!-- Texto -->
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <p class="fs-5">
+        En <strong>Como En Casa</strong>, nuestra pasión por el hogar va más allá de las propiedades: creemos en construir confianza, cercanía y experiencias que marcan una nueva etapa en la vida de nuestros clientes.
+      </p>
+      <p class="fs-5">
+        Somos una inmobiliaria con raíces profundas en <strong>Murcia</strong>, donde llevamos más de una década ayudando a familias, inversores y soñadores a encontrar el lugar perfecto para vivir o crecer.
+      </p>
+      <p class="fs-5">
+        Desde nuestros inicios como un pequeño proyecto familiar, nos hemos consolidado como un referente en el sector inmobiliario murciano, gracias a un equipo comprometido, cercano y experto en cada rincón de nuestra tierra.
+      </p>
+      <p class="fs-5">
+        Ya sea que estés buscando tu primera vivienda, una inversión rentable o vender tu propiedad con transparencia y seguridad, en <strong>Como En Casa</strong> te acompañamos en cada paso con trato humano y tecnología puntera.
+      </p>
+      <a [routerLink]="['/']">
+        <p class="fs-5 text-danger fw-semibold mt-4">
+          Tu hogar empieza aquí. Y empieza con nosotros.
+        </p>
+      </a>
+    </div>
+  </div>
 </div>
+
+</body>
+</html>

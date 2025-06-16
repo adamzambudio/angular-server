@@ -1,21 +1,82 @@
-<div class="container mt-5 d-flex justify-content-center">
-  <div class="card p-4 shadow-sm" style="max-width: 500px; width: 100%;">
-    <h2 class="text-center mb-3">Contáctanos</h2>
-    <form>
-      <div class="mb-3">
-        <label class="form-label">Nombre</label>
-        <input type="text" class="form-control" [(ngModel)]="name" name="name" required>
+<div class="container my-5">
+  <div class="row">
+    <!-- Información de contacto (izquierda) -->
+    <div class="col-md-6 mb-4">
+      <h3>Habla con Nosotros</h3>
+      <p>Solicita información sin compromiso sobre cualquiera de nuestros inmuebles y servicios.</p>
+      <p>Si deseas vender o alquilar tu inmueble, déjalo en nuestras manos. Lo haremos con una gestión profesional y con las mejores condiciones del mercado.</p>
+
+      <p><i class="bi bi-telephone-fill text-secondary"></i> <strong>Ll&aacute;manos:</strong><br>
+        <span class="text-danger">900433152 - 969435488</span></p>
+
+      <p><i class="bi bi-whatsapp text-secondary"></i> <strong>Whatsapp:</strong><br>
+        <span class="text-danger">684 265 269</span></p>
+
+      <p><i class="bi bi-envelope-fill text-secondary"></i> <strong>Escr&iacute;benos:</strong><br>
+        <span class="text-danger">comoencasa&#64;inmobiliariacec.com</span></p>
+
+      <p><i class="bi bi-geo-alt-fill text-secondary"></i> <strong>Vis&iacute;tanos:</strong><br>
+        Avd. Constituci&oacute;n 11, bajo, local 3. 30008, Murcia</p>
+
+      <p><i class="bi bi-clock-fill text-secondary"></i> <strong>Horario:</strong><br>
+        Lunes a Viernes:<br>
+        Mañanas: 09:30 a 14:00 horas<br>
+        Tardes: 16:30 a 20:30 horas</p>
+    </div>
+
+    <!-- Formulario o mensaje de gracias (derecha) -->
+    <div class="col-md-6">
+      <div *ngIf="!formEnviado; else mensajeGracias">
+        <h2 class="mb-4">Contacto</h2>
+        <p class="text-danger fw-semibold">(Campos obligatorios) *</p>
+
+        <form (ngSubmit)="enviarFormulario()" #form="ngForm">
+          <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre completo: <span class="text-danger">*</span></label>
+            <input type="text" id="nombre" class="form-control" required name="nombre" [(ngModel)]="datos.nombre">
+          </div>
+
+          <div class="mb-3">
+            <label for="email" class="form-label">Correo electrónico: <span class="text-danger">*</span></label>
+            <input type="email" id="email" class="form-control" required name="email" [(ngModel)]="datos.email">
+          </div>
+
+          <div class="mb-3">
+            <label for="mensaje" class="form-label">Mensaje: <span class="text-danger">*</span></label>
+            <textarea id="mensaje" rows="4" class="form-control" required name="mensaje" [(ngModel)]="datos.mensaje" placeholder="Escribe tu mensaje aquí"></textarea>
+          </div>
+
+          <label class="form-label">Casillas de verificación: <span class="text-danger">*</span></label>
+
+          <div class="form-check mb-3">
+            <input class="form-check-input" type="checkbox" id="privacidad" required name="privacidad" [(ngModel)]="datos.privacidad">
+            <label class="form-check-label" for="privacidad">
+              Acepto la <a href="https://eur-lex.europa.eu/ES/legal-content/summary/general-data-protection-regulation-gdpr.html" target="_blank">política de privacidad</a>
+            </label>
+          </div>
+
+          <button class="btn btn-danger" type="submit" [disabled]="!form.valid">Enviar</button>
+        </form>
       </div>
-      <div class="mb-3">
-        <label class="form-label">Email</label>
-        <input type="email" class="form-control" [(ngModel)]="email" name="email">
-      </div>
-      <div class="mb-3">
-        <label class="form-label">Mensaje</label>
-        <textarea class="form-control" rows="4" [(ngModel)]="message" name="message"></textarea>
-      </div>
-      <button class="btn btn-primary w-100" (click)="sendMessage()" type="button">Enviar</button>
-    </form>
+
+      <!-- Tarjeta de agradecimiento -->
+      <ng-template #mensajeGracias>
+        <div class="card shadow-lg p-4 text-center mt-3">
+          <h3 class="text-danger">¡Gracias por contactar con nosotros!</h3>
+          <p class="mb-0">Nos pondremos en contacto contigo muy pronto.</p>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+
+  <!-- Mapa al final, fijo en su sitio -->
+  <div class="row mt-5">
+    <div class="col-12">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2644.1541566485275!2d-1.1310855769844927!3d37.990034435089534!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd63821edbc2fe81%3A0x30165e610881eb46!2sAv.%20de%20la%20Constituci%C3%B3n%2C%2011%2C%2030008%20Murcia!5e0!3m2!1ses!2ses!4v1750101893698!5m2!1ses!2ses"
+        width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
   </div>
 </div>
- 

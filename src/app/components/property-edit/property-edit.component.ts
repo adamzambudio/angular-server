@@ -21,6 +21,8 @@ export class PropertyEditComponent implements OnInit {
     images: []
   };
 
+  newImages: File[] = [];
+
   constructor(
     private propertyService: PropertyService,
     private route: ActivatedRoute,
@@ -60,25 +62,38 @@ export class PropertyEditComponent implements OnInit {
     });
   }
 
-  onSubmit(): void {
+  async onSubmit(): Promise<void> {
     const token = localStorage.getItem('token');
     if (!token) {
-      console.warn('No hay token en onSubmit, redirigiendo a login');
-      this.router.navigate(['/login']);
+      await this.router.navigate(['/login']);
       return;
     }
 
-    // console.log('Propiedad que se va a enviar:', this.property);
-    // console.log('Token usado para autorización:', token);
+    const formData = new FormData();
+    formData.append('title', this.property.title);
+    formData.append('description', this.property.description);
+    formData.append('price', this.property.price.toString());
+    formData.append('city', this.property.city);
+    formData.append('type', this.property.type);
+    formData.append('cp', this.property.cp.toString());
+    formData.append('address', this.property.address || '');
 
-    this.propertyService.updateProperty(this.property, token).subscribe({
-      next: () => {
-        // console.log('Propiedad actualizada correctamente');
-        this.router.navigate(['/mis-propiedades']);
-      },
-      error: (err: any) => {
-        console.error('Error al guardar la propiedad:', err);
-      }
+    this.newImages.forEach((file, i) => {
+      formData.append('images[]', file);
+    });
+
+    this.propertyService.updatePropertyWithImages(this.property.id, formData, token).subscribe({
+      next: () => this.router.navigate(['/mis-propiedades']),
+      error: (err) => console.error('Error al guardar la propiedad:', err)
     });
   }
+
+  onFileChange(event: Event): void {
+    const target = event.target as HTMLInputElement;
+    if (target.files) {
+      this.newImages = Array.from(target.files);
+    }
+  }
+
+
 }

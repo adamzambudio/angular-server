@@ -1,7 +1,7 @@
 <div class="container mt-5">
   <h2>Editar Propiedad</h2>
 
-  <form *ngIf="property" (ngSubmit)="onSubmit()" #editForm="ngForm">
+  <form *ngIf="property" (ngSubmit)="onSubmit()" #editForm="ngForm" enctype="multipart/form-data">
     <div class="mb-3">
       <label>Título</label>
       <input class="form-control" [(ngModel)]="property.title" name="title" required />
@@ -37,8 +37,21 @@
       <input type="number" class="form-control" [(ngModel)]="property.cp" name="cp" required />
     </div>
 
-    <button type="submit" class="btn btn-success" [disabled]="editForm.invalid">Guardar cambios</button>
+  <div class="mb-3">
+    <label>Subir nuevas imágenes</label>
+    <input type="file" class="form-control" (change)="onFileChange($event)" multiple />
+  </div>
+  
+  <button type="submit" class="btn btn-success" [disabled]="editForm.invalid">Guardar cambios</button>
   </form>
+  
+  <hr />
+  <div *ngIf="property.images?.length">
+    <h5>Imágenes actuales:</h5>
+    <div class="d-flex flex-wrap gap-3">
+      <img *ngFor="let img of property.images" [src]="img" width="120" class="img-thumbnail" />
+    </div>
+  </div>
 
 
 </div>

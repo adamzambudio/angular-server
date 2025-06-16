@@ -72,4 +72,9 @@ export class PropertyService {
     return this.http.put<Property>(`http://localhost:8000/api/properties/${property.id}`, property, { headers });
   }
   
+
+  updatePropertyWithImages(id: number, formData: FormData, token: string): Observable<any> {
+    const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
+    return this.http.post(`${this.baseUrl}/${id}/update-with-images`, formData, { headers });
+  }
 }
