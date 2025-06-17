@@ -1,3 +1,8 @@
+/* src/app/components/login/login.component.css */
+
+/* COPIA Y PEGA TODO EL CONTENIDO DE register.component.css AQUÍ */
+/* Asegúrate de que este archivo tenga los mismos estilos que register.component.css */
+
 body {
     font-family: Arial, sans-serif;
     margin: 20px;
@@ -69,10 +74,9 @@ button:hover {
     color: red;
     margin-top: 10px;
     font-weight: bold;
-    text-align: center; /* Centrar mensaje de error */
+    text-align: center;
 }
 
-/* NUEVO: Estilo para la frasecita de enlace */
 .form-link-text {
     text-align: center;
     margin-top: 20px;

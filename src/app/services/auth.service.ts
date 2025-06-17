@@ -59,6 +59,7 @@ export class AuthService {
   logout(): void {
     localStorage.removeItem('token');
     localStorage.removeItem('roles');
+    localStorage.removeItem('userFavorites_');
   }
 
   private getRolesFromToken(token: string): string[] {
@@ -81,6 +82,17 @@ export class AuthService {
       console.error('Error al parsear el token JWT:', e);
       return null;
     }
+  }
+
+  getUserId(): string | null { // Cambia el tipo de retorno a string | null
+    const token = this.getToken();
+    if (token) {
+      const payload = this.parseJwt(token);
+      if (payload && payload.username) { // Usa 'username'
+        return payload.username; // Devuelve el email del usuario
+      }
+    }
+    return null;
   }
 
   register(name: string, email: string, password: string) {

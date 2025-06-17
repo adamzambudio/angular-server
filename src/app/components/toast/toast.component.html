@@ -1,0 +1,7 @@
+<div *ngIf="currentToast" [@toastAnimation] class="toast-wrapper">
+  <div [ngClass]="getToastClasses()">
+    <span>{{ currentToast.message }}</span>
+    <button class="close-button" (click)="closeToast()">
+      <i class="bi bi-x-lg"></i> </button>
+  </div>
+</div>

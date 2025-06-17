@@ -1,0 +1,30 @@
+<div class="container-fluid mt-5 mb-5">
+  <h2 class="section-title text-center">Mis Propiedades Favoritas</h2>
+
+  <div *ngIf="favoriteProperties.length === 0" class="alert alert-info text-center">
+    No tienes propiedades marcadas como favoritas.
+  </div>
+
+  <div class="properties-grid" *ngIf="favoriteProperties.length > 0">
+    <div *ngFor="let p of favoriteProperties">
+      <div class="card property-card">
+        <div class="property-image-wrapper">
+          <a [routerLink]="['/property', p.id]">
+            <img [src]="p.images[0].url" class="clickable-img" alt="Foto de la Propiedad">
+          </a>
+          <div class="favorite-icon" (click)="toggleFavoriteFromFavorites(p)">
+            <i class="bi bi-heart-fill text-danger"></i> </div>
+        </div>
+
+        <div class="card-body text-center">
+          <h5 class="card-title">{{ p.title }}</h5>
+          <p class="card-text">{{ p.city }}</p>
+          <p class="card-text">{{ p.address }}</p>
+          <div class="price-box">{{ p.price | formatoPrecio }}</div>
+
+          <a class="btn btn-details" [routerLink]="['/property', p.id]">Ver más</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

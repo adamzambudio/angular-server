@@ -7,6 +7,10 @@ import { ContactComponent } from './components/contact/contact.component';
 import { AboutComponent } from './components/about/about.component';
 import { RegisterComponent } from './components/register/register.component';
 import { PropertyEditComponent } from './components/property-edit/property-edit.component';
+import { PropertyAddComponent } from './components/property-add/property-add.component';
+import { FavoritesComponent } from './components/favoritos/favoritos.component';
+import { AdminGuard } from './guard/admin.guard';
+import { AuthGuard } from './guard/auth.guard';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -15,7 +19,9 @@ export const routes: Routes = [
   { path: 'contact', component: ContactComponent },
   { path: 'property/:id', component: PropertyDetailComponent },
   { path: 'about', component: AboutComponent },
-    { path: 'propertyEdit/:id', component: PropertyEditComponent },
+  { path: 'propertyAdd', component: PropertyAddComponent, canActivate: [AdminGuard] },
+  { path: 'propertyEdit/:id', component: PropertyEditComponent, canActivate: [AdminGuard] }, 
+  { path: 'favorites', component: FavoritesComponent, canActivate: [AuthGuard] }, 
   { path: '**', component: HomeComponent }
 ];
 

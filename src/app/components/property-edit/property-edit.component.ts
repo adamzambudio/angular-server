@@ -3,11 +3,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { PropertyService, Property } from '../../services/property.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-property-edit',
-  templateUrl: './property-edit.component.html',
   imports: [FormsModule, CommonModule],
+  templateUrl: './property-edit.component.html',
+  styleUrl: './property-edit.component.css'
 })
 export class PropertyEditComponent implements OnInit {
   property: Property = {
@@ -25,13 +27,14 @@ export class PropertyEditComponent implements OnInit {
 
   constructor(
     private propertyService: PropertyService,
+    private authService: AuthService,
     private route: ActivatedRoute,
     private router: Router
   ) {}
 
   ngOnInit(): void {
     const idParam = this.route.snapshot.paramMap.get('id');
-    const token = localStorage.getItem('token');
+    const token = this.authService.getToken();
 
     // console.log('Token al iniciar componente:', token);
     if (!token) {
@@ -50,7 +53,7 @@ export class PropertyEditComponent implements OnInit {
     // console.log('ID propiedad a cargar:', id);
 
     // Llamada para obtener propiedad con token (modificar servicio si es necesario)
-    this.propertyService.getPropertyById(id).subscribe({
+    this.propertyService.getPropertyById(id, token).subscribe({
       next: (data: Property) => {
         // console.log('Propiedad recibida del servicio:', data);
         this.property = data;
@@ -95,5 +98,30 @@ export class PropertyEditComponent implements OnInit {
     }
   }
 
+
+  deleteImage(imageId: number): void {
+    if (!confirm('¿Estás seguro de que quieres eliminar esta imagen?')) {
+      return;
+    }
+
+    const token = this.authService.getToken();
+    if (!token) {
+      alert('No estás autenticado para realizar esta acción.');
+      this.router.navigate(['/login']);
+      return;
+    }
+
+    this.propertyService.deleteImage(imageId, token).subscribe({
+      next: () => {
+        alert('Imagen eliminada correctamente.');
+        // Actualiza la lista de imágenes en el frontend para reflejar la eliminación
+        this.property.images = this.property.images.filter(img => img.id !== imageId);
+      },
+      error: (err) => {
+        console.error('Error al eliminar la imagen:', err);
+        alert('Error al eliminar la imagen. Asegúrate de tener permisos de administrador.');
+      }
+    });
+  }
 
 }

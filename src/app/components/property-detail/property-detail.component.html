@@ -12,7 +12,7 @@
           *ngFor="let img of property.images; let i = index"
           [class.active]="i === 0"
         >
-          <img [src]="img" class="d-block w-100 property-image" alt="Imagen de la propiedad">
+          <img [src]="img.url" class="d-block w-100 property-image" alt="Imagen de la propiedad">
         </div>
       </div>
       <button class="carousel-control-prev" type="button" data-bs-target="#propertyCarousel" data-bs-slide="prev">

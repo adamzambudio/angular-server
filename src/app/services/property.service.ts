@@ -11,7 +11,8 @@ export interface Property {
   city: string;
   type: string;
   cp: number;
-  images: [];
+  images: { id: number; url: string }[];
+  isFavorite?: boolean;
 }
 
 
@@ -19,6 +20,7 @@ export interface Property {
 export class PropertyService {
 
   private baseUrl = 'http://localhost:8000/api/properties';
+  private imageBaseUrl = 'http://localhost:8000/api/images';
 
   constructor(private http: HttpClient) {}
 
@@ -76,5 +78,29 @@ export class PropertyService {
   updatePropertyWithImages(id: number, formData: FormData, token: string): Observable<any> {
     const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
     return this.http.post(`${this.baseUrl}/${id}/update-with-images`, formData, { headers });
+  }
+
+  deleteImage(imageId: number, token: string): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.delete(`${this.imageBaseUrl}/${imageId}`, { headers });
+  }
+
+  createPropertyWithImages(formData: FormData, token: string) {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+
+    // Aquí cambias la URL a /api/properties sin 'create-with-images'
+    return this.http.post('http://localhost:8000/api/properties', formData, { headers });
+
+  }
+
+  deleteProperty(id: number, token: string): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.delete(`${this.baseUrl}/${id}`, { headers });
   }
 }

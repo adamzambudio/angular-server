@@ -1,6 +1,5 @@
 <div class="container-fluid mt-5 mb-5">
-  
-  <!-- Componente filtro: emite propiedades filtradas -->
+
   <app-property-filter (propertiesFiltered)="onPropertiesFiltered($event)"></app-property-filter><br><br>
 
   <h2 class="section-title text-center">Ofertas de inmuebles en venta</h2>
@@ -9,30 +8,37 @@
 
   <div class="properties-grid">
     <div *ngFor="let p of properties; let i = index; trackBy: trackByIndex">
-    <div class="card property-card">
-      <div class="property-image-wrapper">
-        <a [routerLink]="['/property', p.id]">
-          <img [src]="p.images[0]" class="clickable-img" alt="Foto de la Propiedad">
-        </a>
-        <div class="favorite-icon" (click)="toggleFavorite(p)">
-          <i class="bi" [ngClass]="p.isFavorite ? 'bi-heart-fill' : 'bi-heart'"></i>
+      <div class="card property-card">
+        <div class="property-image-wrapper">
+          <a [routerLink]="['/property', p.id]">
+            <img [src]="p.images[0].url" class="clickable-img" alt="Foto de la Propiedad">
+          </a>
+          <div class="favorite-icon" (click)="toggleFavorite(p)">
+            <i class="bi" [ngClass]="p.isFavorite ? 'bi-heart-fill' : 'bi-heart'"></i>
+          </div>
+
         </div>
 
+        <div class="card-body text-center">
+          <h5 class="card-title">{{ p.title }}</h5>
+          <p class="card-text">{{ p.city }}</p>
+          <p class="card-text">{{ p.address }}</p>
+          <div class="price-box">{{ p.price | formatoPrecio }}</div>
+
+          <a class="btn btn-details" [routerLink]="['/property', p.id]">Ver más</a>
+
+          <a *ngIf="authService.isAdmin()" class="btn btn-warning mt-2" [routerLink]="['/propertyEdit', p.id]">
+            Editar propiedad
+          </a>
+
+          <app-property-delete
+            *ngIf="authService.isAdmin()"
+            [propertyId]="p.id"
+            buttonText="Eliminar propiedad"
+            (propertyDeleted)="onPropertyDeleted($event)"
+            class="d-block mt-2" ></app-property-delete>
+        </div>
       </div>
-  
-      <div class="card-body text-center">
-        <h5 class="card-title">{{ p.title }}</h5>
-        <p class="card-text">{{ p.city }}</p>
-        <p class="card-text">{{ p.address }}</p>
-        <div class="price-box">{{ p.price | formatoPrecio }}</div>
-  
-        <a class="btn btn-details" [routerLink]="['/property', p.id]">Ver más</a>
-  
-        <a *ngIf="authService.isAdmin()" class="btn btn-warning mt-2" [routerLink]="['/propertyEdit', p.id]">
-          Editar propiedad
-        </a>
-      </div>
-    </div>
     </div>
   </div>
 </div>

@@ -1,0 +1,48 @@
+/* src/app/property-edit/property-edit.component.css */
+
+.image-thumbnail-container {
+  position: relative; /* Necesario para posicionar el botón */
+  width: 200px; /* Ancho fijo para el contenedor */
+  height: 150px; /* Alto fijo para el contenedor (ajusta esto para tu proporción deseada) */
+  overflow: hidden; /* Oculta partes de la imagen que excedan el contenedor */
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  display: flex; /* Para centrar la imagen */
+  justify-content: center; /* Centrar horizontalmente */
+  align-items: center; /* Centrar verticalmente */
+}
+
+.rectangular-img {
+  width: 100%; /* La imagen ocupará el 100% del ancho del contenedor */
+  height: 100%; /* La imagen ocupará el 100% del alto del contenedor */
+  object-fit: cover; /* Recorta la imagen para que quepa en el contenedor sin distorsión */
+  display: block; /* Elimina espacio extra que puede aparecer debajo de la imagen */
+}
+
+.delete-image-btn {
+  position: absolute; /* Posiciona el botón sobre la imagen */
+  top: 5px; /* Margen desde arriba */
+  right: 5px; /* Margen desde la derecha */
+  background-color: rgba(220, 53, 69, 0.8); /* Rojo semitransparente */
+  color: white;
+  border: none;
+  border-radius: 50%; /* Botón redondo */
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.2s ease;
+  z-index: 10; /* Asegura que esté por encima de la imagen */
+}
+
+.delete-image-btn:hover {
+  background-color: rgba(220, 53, 69, 1); /* Rojo opaco al pasar el ratón */
+}
+
+/* Opcional: ajustar el tamaño del textarea */
+textarea.form-control {
+  resize: vertical; /* Permite redimensionar verticalmente */
+}
