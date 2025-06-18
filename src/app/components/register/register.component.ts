@@ -20,7 +20,7 @@ export class RegisterComponent {
   constructor(private authService: AuthService, private router: Router, private toastService: ToastService) {}
 
   onRegister(): void {
-    this.errorMessage = ''; // Limpiar mensaje de error antes de un nuevo intento
+    this.errorMessage = '';
     this.authService.register(this.name, this.email, this.password).subscribe({
       next: (res) => {
         this.toastService.success('¡Registro exitoso! Ya puedes iniciar sesión con tu cuenta.'); // Toast de éxito
