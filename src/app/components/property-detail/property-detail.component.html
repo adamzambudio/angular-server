@@ -1,71 +1,115 @@
-<div class="property-detail-container" *ngIf="property">
-  <div class="container mt-5">
-    <h2 class="property-title">{{ property.title }}</h2>
-    <p class="text-muted">{{ property.address }}</p>
-    <h4 class="property-price">Precio: {{ property.price }}€</h4>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
-    <!-- Carrusel de imágenes -->
-    <div id="propertyCarousel" class="carousel slide mb-4" data-bs-ride="carousel">
-      <div class="carousel-inner rounded shadow-sm">
-        <div 
-          class="carousel-item" 
-          *ngFor="let img of property.images; let i = index"
-          [class.active]="i === 0"
-        >
-          <img [src]="img.url" class="d-block w-100 property-image" alt="Imagen de la propiedad">
+<div class="container-fluid px-0 property-detail-container" *ngIf="property">
+
+  <!-- Título arriba -->
+  <!-- Título arriba con botón de favoritos estilo toggle -->
+  <div class="text-center my-4 d-flex justify-content-center align-items-center gap-3">
+    <h1 class="property-title mb-0">{{ property.title }}</h1>
+    <button class="btn d-flex align-items-center gap-2"
+      [ngClass]="property.isFavorite ? 'btn-favorite' : 'btn-favorite-outline'" (click)="toggleFavorite()">
+      <span>{{ property.isFavorite ? 'Quitar de Favoritos' : 'Añadir a Favoritos' }}</span>
+      <i class="bi" [ngClass]="property.isFavorite ? 'bi-heart-fill' : 'bi-heart'"></i>
+    </button>
+  </div>
+
+
+
+  <!-- Carrusel -->
+  <div id="propertyCarousel" class="carousel slide mx-auto mb-5" data-bs-ride="carousel" style="max-width: 1150px;">
+    <div class="carousel-inner">
+      <div class="carousel-item" *ngFor="let img of property.images; let i = index" [class.active]="i === 0">
+        <img [src]="img.url" class="d-block w-100 property-image" alt="Imagen de la propiedad" style="cursor: zoom-in;"
+          (click)="openLightbox(i)">
+      </div>
+    </div>
+    <button class="carousel-control-prev custom-control" type="button" data-bs-target="#propertyCarousel"
+      data-bs-slide="prev">
+      <span class="carousel-control-prev-icon custom-icon"></span>
+    </button>
+    <button class="carousel-control-next custom-control" type="button" data-bs-target="#propertyCarousel"
+      data-bs-slide="next">
+      <span class="carousel-control-next-icon custom-icon"></span>
+    </button>
+  </div>
+
+  <!-- Detalle inferior -->
+  <div class="container pb-5">
+    <div class="row">
+
+
+
+      <!-- Descripción -->
+      <div class="col-lg-8">
+        <div class="price-box mx-auto mb-5">
+          {{ property.price | formatoPrecio }}
+        </div>
+        <h2 class="property-subtitle mb-3">Ubicación de la propiedad:</h2>
+        <p class="property-description">{{property.city}}, {{ property.address }}</p>
+        <br>
+        <br>
+        <h2 class="property-subtitle mb-3">Descripción de la propiedad</h2>
+        <p class="property-description">{{ property.description }}</p>
+      </div>
+
+      <!-- Formulario -->
+      <div class="col-lg-4 mt-4 mt-lg-0">
+        <div class="contact-form p-4 shadow rounded">
+          <h4>Formulario de contacto</h4>
+
+          <p style="color: red;">(Datos obligatorios) *</p>
+          <br>
+
+          <form (ngSubmit)="submitContactForm()" #formRef="ngForm" novalidate>
+            <div class="mb-3">
+              <label>Nombre: <span style="color: red;">*</span></label>
+              <input type="text" class="form-control" [(ngModel)]="contactForm.nombre" name="nombre" required>
+            </div>
+            <div class="mb-3">
+              <label>Teléfono: <span style="color: red;">*</span></label>
+              <input type="tel" class="form-control" [(ngModel)]="contactForm.telefono" name="telefono" required
+                pattern="[0-9]{9}">
+            </div>
+            <div class="mb-3">
+              <label>Email: <span style="color: red;">*</span></label>
+              <input type="email" class="form-control" [(ngModel)]="contactForm.email" name="email" required>
+            </div>
+            <div class="mb-3">
+              <label>Mensaje: <span style="color: red;">*</span></label>
+              <textarea class="form-control" rows="4" [(ngModel)]="contactForm.mensaje" name="mensaje"
+                required></textarea>
+            </div>
+            <button type="submit" class="btn btn-form w-100">Enviar</button>
+          </form>
         </div>
       </div>
-      <button class="carousel-control-prev" type="button" data-bs-target="#propertyCarousel" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon"></span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#propertyCarousel" data-bs-slide="next">
-        <span class="carousel-control-next-icon"></span>
-      </button>
-    </div>
 
-    <p class="property-description">{{ property.description }}</p>
 
-    <div class="action-buttons">
-      <button class="btn-primary" (click)="comprarProperty()">Comprar</button>
-      <button class="btn-contact" (click)="toggleContactForm()">Contactar</button>
     </div>
   </div>
 </div>
 
-
-
-<div class="modal-backdrop" *ngIf="showContactForm" (click)="toggleContactForm()"></div>
-<div class="modal" *ngIf="showContactForm">
-  <div class="modal-content" (click)="$event.stopPropagation()">
-    <h3>Contactar al vendedor</h3>
-    <p style="color: red;">(Campos obligatorios) *</p>
-
-    <form (ngSubmit)="submitContactForm()" #formRef="ngForm" novalidate>
-      <div class="form-group">
-        <label for="nombre">Nombre completo: <span class="required">*</span></label>
-        <input type="text" id="nombre" name="nombre" [(ngModel)]="contactForm.nombre" required/>
+<!-- Lightbox Modal -->
+<div *ngIf="property" #lightboxModal class="modal fade" id="lightboxModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content bg-dark">
+      <!-- quitar modal-header si quieres -->
+      <div class="modal-body p-0">
+        <div #lightboxCarousel id="lightboxCarousel" class="carousel slide" data-bs-ride="false"> <!-- sin autoplay -->
+          <div class="carousel-inner">
+            <div class="carousel-item" *ngFor="let img of property.images; let i = index" [class.active]="i === 0">
+              <img [src]="img.url" class="d-block w-100 h-100 object-fit-contain">
+            </div>
+          </div>
+          <!-- botones flechas -->
+          <button class="carousel-control-prev" type="button" data-bs-target="#lightboxCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#lightboxCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+          </button>
+        </div>
       </div>
-
-      <div class="form-group">
-        <label for="telefono">Teléfono: <span class="required">*</span></label>
-        <input type="tel" id="telefono" name="telefono" [(ngModel)]="contactForm.telefono" required pattern="[0-9]{9}"/>
-        <small style="color: gray;">Solo números, mínimo 9 dígitos</small>
-      </div>
-
-      <div class="form-group">
-        <label for="email">Correo electrónico: <span class="required">*</span></label>
-        <input type="email" id="email" name="email" [(ngModel)]="contactForm.email" required/>
-      </div>
-
-      <div class="form-group">
-        <label for="mensaje">Mensaje: <span class="required">*</span></label>
-        <textarea id="mensaje" name="mensaje" rows="4" [(ngModel)]="contactForm.mensaje" required placeholder="Escribe tu mensaje aquí"></textarea>
-      </div>
-
-      <div class="form-buttons">
-        <button type="submit" class="btn-primary">Enviar</button>
-        <button type="button" class="btn-contact" (click)="toggleContactForm()">Cancelar</button>
-      </div>
-    </form>
+    </div>
   </div>
 </div>

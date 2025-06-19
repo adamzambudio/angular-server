@@ -11,33 +11,34 @@
       <div class="card property-card">
         <div class="property-image-wrapper">
           <a [routerLink]="['/property', p.id]">
-            <img [src]="p.images[0].url" class="clickable-img" alt="Foto de la Propiedad">
+            <img [src]="p?.images?.length ? p.images[0].url : 'assets/CECc.png'" class="clickable-img" alt="Foto de la Propiedad">
           </a>
           <div class="favorite-icon" (click)="toggleFavorite(p)">
             <i class="bi" [ngClass]="p.isFavorite ? 'bi-heart-fill' : 'bi-heart'"></i>
           </div>
-
         </div>
 
         <div class="card-body text-center">
           <h5 class="card-title">{{ p.title }}</h5>
-          <p class="card-text">{{ p.city }}</p>
-          <p class="card-text">{{ p.address }}</p>
-          <div class="price-box">{{ p.price | formatoPrecio }}</div>
+          <p class="property-city">📍 {{ p.city }}</p>
+          <p class="property-address"><em>{{ p.address }}</em></p>
 
-          <a class="btn btn-details" [routerLink]="['/property', p.id]">Ver más</a>
-
-          <a *ngIf="authService.isAdmin()" class="btn btn-warning mt-2" [routerLink]="['/propertyEdit', p.id]">
-            Editar propiedad
-          </a>
-
-          <app-property-delete
-            *ngIf="authService.isAdmin()"
-            [propertyId]="p.id"
-            buttonText="Eliminar propiedad"
-            (propertyDeleted)="onPropertyDeleted($event)"
-            class="d-block mt-2" ></app-property-delete>
         </div>
+
+        <div class="price-box">{{ p.price | formatoPrecio }}</div>
+
+        <a class="btn btn-details" [routerLink]="['/property', p.id]">Ver más</a>
+
+        <a *ngIf="authService.isAdmin()" class="btn btn-warning mt-2" [routerLink]="['/propertyEdit', p.id]">
+          Editar propiedad
+        </a>
+
+        <app-property-delete
+          *ngIf="authService.isAdmin()"
+          [propertyId]="p.id"
+          buttonText="Eliminar propiedad"
+          (propertyDeleted)="onPropertyDeleted($event)"
+          class="d-block mt-2"></app-property-delete>
       </div>
     </div>
   </div>

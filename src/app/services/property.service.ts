@@ -19,8 +19,8 @@ export interface Property {
 @Injectable({ providedIn: 'root' })
 export class PropertyService {
 
-  private baseUrl = 'http://localhost:8000/api/properties';
-  private imageBaseUrl = 'http://localhost:8000/api/images';
+  private baseUrl = '/api/properties';
+  private imageBaseUrl = '/api/images';
 
   constructor(private http: HttpClient) {}
 
@@ -34,7 +34,7 @@ export class PropertyService {
       if (filters.max !== undefined) params = params.set('max', filters.max.toString());
     }
 
-    return this.http.get<Property[]>('http://localhost:8000/api/properties', { params });
+    return this.http.get<Property[]>('/api/properties', { params });
   }
 
   getPropertyById(id: number, token?: string): Observable<Property> {
@@ -71,9 +71,9 @@ export class PropertyService {
       'Authorization': `Bearer ${token}`
     });
 
-    return this.http.put<Property>(`http://localhost:8000/api/properties/${property.id}`, property, { headers });
+    return this.http.put<Property>(`/api/properties/${property.id}`, property, { headers });
   }
-  
+
 
   updatePropertyWithImages(id: number, formData: FormData, token: string): Observable<any> {
     const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
@@ -93,7 +93,7 @@ export class PropertyService {
     });
 
     // Aquí cambias la URL a /api/properties sin 'create-with-images'
-    return this.http.post('http://localhost:8000/api/properties', formData, { headers });
+    return this.http.post('/api/properties', formData, { headers });
 
   }
 
