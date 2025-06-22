@@ -94,9 +94,15 @@ export class PropertyEditComponent implements OnInit {
   onFileChange(event: Event): void {
     const target = event.target as HTMLInputElement;
     if (target.files) {
-      this.newImages = Array.from(target.files);
+      const files = Array.from(target.files);
+      if (files.length > 20) {
+        alert('No puedes subir más de 20 imágenes.');
+        return;
+      }
+      this.newImages = files;
     }
   }
+
 
 
   deleteImage(imageId: number): void {

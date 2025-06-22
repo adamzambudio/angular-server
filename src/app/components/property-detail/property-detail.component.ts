@@ -25,8 +25,12 @@ export class PropertyDetailComponent {
     nombre: '',
     telefono: '',
     email: '',
-    mensaje: ''
+    mensaje: '',
+    privacyPolicyAccepted: false
   };
+
+  showPrivacyError = false;
+
 
   @ViewChild('lightboxModal') lightboxModal!: ElementRef;
   @ViewChild('lightboxCarousel') lightboxCarousel!: ElementRef;
@@ -88,43 +92,61 @@ export class PropertyDetailComponent {
 
 
   submitContactForm() {
-    // Validación simple de campos requeridos
-    const { nombre, telefono, email, mensaje } = this.contactForm;
-
-    if (!nombre || !telefono || !email || !mensaje) {
-      alert('Por favor, completa todos los campos obligatorios.');
+    // Primero comprobamos si el usuario está logeado
+    if (!this.authService.isLoggedIn()) {
+      this.toastService.info('Debes iniciar sesión para enviar el formulario.');
+      setTimeout(() => {
+        this.router.navigate(['/login'], { queryParams: { returnUrl: this.router.url } });
+      }, 2000);
       return;
     }
 
-    // Validación de formato de teléfono (solo números, 9 dígitos)
+    const { nombre, telefono, email, mensaje, privacyPolicyAccepted } = this.contactForm;
+
+    // Validación manual adicional por seguridad
+    if (!nombre || !telefono || !email || !mensaje) {
+      this.toastService.error('Por favor, completa todos los campos obligatorios.');
+      return;
+    }
+
+    // Validación del teléfono
     const telefonoValido = /^[0-9]{9}$/.test(telefono);
     if (!telefonoValido) {
-      alert('El número de teléfono debe contener solo números y tener 9 dígitos.');
+      this.toastService.error('El número de teléfono debe tener 9 dígitos.');
       return;
     }
 
-    // Validación básica de email (ya se valida en el input, pero puede reforzarse)
+    // Validación de email (ya lo valida el input pero reforzamos)
     const emailValido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
     if (!emailValido) {
-      alert('Por favor, introduce un correo electrónico válido.');
+      this.toastService.error('El correo electrónico no es válido.');
       return;
     }
 
-    // Aquí va tu lógica de envío real, por ejemplo a una API o servicio
+    // Validación de la casilla de privacidad
+    if (!privacyPolicyAccepted) {
+      this.showPrivacyError = true;
+      this.toastService.error('Debes aceptar la política de privacidad.');
+      return;
+    } else {
+      this.showPrivacyError = false;
+    }
+
+    // Aquí iría el envío real a tu backend o API
     console.log('Formulario enviado:', this.contactForm);
+    this.toastService.success('Formulario enviado correctamente.');
 
-    // Mostrar confirmación al usuario
-    alert('Formulario enviado correctamente. Gracias por contactarnos.');
-
-    // Opcional: reiniciar el formulario
+    // Limpiar formulario
     this.contactForm = {
       nombre: '',
       telefono: '',
       email: '',
-      mensaje: ''
+      mensaje: '',
+      privacyPolicyAccepted: false
     };
+    this.showPrivacyError = false;
 
-    // Cerrar el modal o formulario
+    // Opcional: ocultar el formulario
     this.toggleContactForm();
   }
 

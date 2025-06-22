@@ -19,6 +19,8 @@ export class HomeComponent implements OnInit {
   properties: Property[] = [];
   private userFavoritesKeyPrefix = 'userFavorites_';
 
+  openedMenuId: number | null = null;
+
   constructor(
     private propertyService: PropertyService,
     public authService: AuthService,
@@ -26,11 +28,35 @@ export class HomeComponent implements OnInit {
     private toastService: ToastService
   ) {}
 
+    toggleMenu(propertyId: number) {
+    if (this.openedMenuId === propertyId) {
+      this.openedMenuId = null;
+    } else {
+      this.openedMenuId = propertyId;
+    }
+  }
+
+  closeMenu() {
+    this.openedMenuId = null;
+  }
+
+  // Cerramos menú al hacer clic fuera
   ngOnInit(): void {
     this.loadProperties();
+
+    document.addEventListener('click', () => {
+      this.closeMenu();
+    });
+
     if (this.authService.isAdmin()) {
       console.log('Usuario administrador');
     }
+  }
+
+  ngOnDestroy(): void {
+    document.removeEventListener('click', () => {
+      this.closeMenu();
+    });
   }
 
    loadProperties() {

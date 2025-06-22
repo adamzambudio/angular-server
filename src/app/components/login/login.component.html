@@ -9,11 +9,23 @@
     <label for="email">Correo electrónico: <span class="required">*</span></label>
     <input type="email" id="email" name="email" [(ngModel)]="email" required>
   </div>
+  
 
-  <div class="form-body">
+
+  <div class="form-body" style="position: relative;">
     <label for="password">Contraseña: <span class="required">*</span></label>
-    <input type="password" id="password" name="password" [(ngModel)]="password" required>
+    
+    <input [type]="showPassword ? 'text' : 'password'" id="password" name="password" [(ngModel)]="password" required>
+
+    <!-- Icono para mostrar/ocultar con tooltip -->
+    <span 
+      (click)="togglePasswordVisibility()" 
+      [title]="showPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'"
+      style="position: absolute; right: 10px; top: 38px; cursor: pointer;">
+      <i [ngClass]="showPassword ? 'fa fa-eye-slash' : 'fa fa-eye'"></i>
+    </span>
   </div>
+  
 
   <div class="form-actions">
     <button type="submit">Iniciar Sesión</button>

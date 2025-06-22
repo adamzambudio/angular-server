@@ -16,6 +16,8 @@ export class LoginComponent {
   password = '';
   errorMessage = '';
 
+  showPassword = false;
+
   constructor(
     private authService: AuthService,
     private router: Router,
@@ -39,5 +41,10 @@ export class LoginComponent {
         this.toastService.error(msg); // Toast de error
       }
     });
+  }
+
+
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
   }
 }

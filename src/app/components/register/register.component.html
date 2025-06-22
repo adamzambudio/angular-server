@@ -1,13 +1,11 @@
 <form (ngSubmit)="onRegister()">
   <h1>Crear Cuenta</h1>
-
   <p style="color: red;">(Datos obligatorios) *</p>
-
   <br>
 
   <div class="form-body">
     <label for="name">Escribe tu nombre completo: <span class="required">*</span></label>
-    <input type="text" id="name" name="name" [(ngModel)]="name" required maxlength="15" />
+    <input type="text" id="name" name="name" [(ngModel)]="name" required maxlength="50" />
   </div>
 
   <div class="form-body">
@@ -16,10 +14,28 @@
     <input type="email" id="email" name="email" [(ngModel)]="email" required />
   </div>
 
-  <div class="form-body">
+  <div class="form-body" style="position: relative;">
     <label for="password">Contraseña: <span class="required">*</span></label>
     <span style="color: #fd0e0e; font-size: 13px;">(mínimo 8 caracteres, 1 mayúscula y 1 número)</span>
-    <input type="password" id="password" name="password" [(ngModel)]="password" required />
+
+    <input [type]="showPassword ? 'text' : 'password'" id="password" name="password" [(ngModel)]="password" required />
+
+    <!-- Icono de mostrar/ocultar contraseña -->
+    <span 
+      (click)="togglePasswordVisibility()" 
+      [title]="showPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'"
+      style="position: absolute; right: 10px; top: 58px; cursor: pointer;">
+      <i [ngClass]="showPassword ? 'fa fa-eye-slash' : 'fa fa-eye'"></i>
+    </span>
+  </div>
+
+  <div class="form-body">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" id="privacyPolicy" [(ngModel)]="privacyPolicyAccepted" name="privacyPolicy" />
+      <label class="form-check-label" for="privacyPolicy">
+        Acepto la <a href="https://eur-lex.europa.eu/ES/legal-content/summary/general-data-protection-regulation-gdpr.html" target="_blank">política de privacidad</a>
+      </label>
+    </div>
   </div>
 
   <div class="form-actions">

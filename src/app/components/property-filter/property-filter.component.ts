@@ -48,16 +48,28 @@ export class PropertyFilterComponent implements OnInit {
 
 
   onCityChange() {
-    this.filters.type = '';  // Limpiar el tipo si cambia la ciudad
-    if (this.filters.city) {
-      this.loadTypes(this.filters.city);
+  if (this.filters.city) {
+    this.propertyService.getTypes(this.filters.city).subscribe(types => {
+      // Si el tipo actualmente seleccionado no está en la nueva lista, lo añadimos temporalmente
+      if (this.filters.type && !types.includes(this.filters.type)) {
+        types.push(this.filters.type);
+      }
+      this.types = types;
       this.loadPriceRange();
-    } else {
-      this.loadTypes(); // carga todos los tipos sin filtrar por ciudad
-      this.filters.min = null;
-      this.filters.max = null;
-    }
+    });
+  } else {
+    this.propertyService.getTypes().subscribe(types => {
+      if (this.filters.type && !types.includes(this.filters.type)) {
+        types.push(this.filters.type);
+      }
+      this.types = types;
+    });
+    this.filters.min = null;
+    this.filters.max = null;
   }
+}
+
+
 
   onTypeChange() {
     this.loadPriceRange();

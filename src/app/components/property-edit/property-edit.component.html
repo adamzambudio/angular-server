@@ -39,7 +39,7 @@
 
   <div class="mb-3">
     <label>Subir nuevas imágenes</label>
-    <input type="file" class="form-control" (change)="onFileChange($event)" multiple />
+    <input type="file" class="form-control" (change)="onFileChange($event)" multiple [attr.max]="20"/>
   </div>
   
   <button type="submit" class="btn btn-success" [disabled]="editForm.invalid">Guardar cambios</button>

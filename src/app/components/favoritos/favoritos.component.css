@@ -1,101 +1,128 @@
-/* src/app/components/favorites/favorites.component.css */
-/* Aquí irían los estilos específicos para FavoritesComponent,
-   o puedes importar estilos compartidos si tu configuración lo permite. */
+.section-title {
+  font-weight: 600;
+  color: #212529;
+  position: relative;
+}
 
-/* Ejemplo, si los estilos de grid y card no son globales: */
-.properties-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 25px;
-  padding: 20px 0;
+.section-title::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 4px;
+  background: linear-gradient(45deg, #0d6efd, #20c997);
+  margin: 10px auto 0;
+  border-radius: 2px;
 }
 
 .property-card {
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
+  border: none;
+  border-radius: 15px;
   overflow: hidden;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  transition: transform 0.2s ease-in-out;
-  display: flex;
-  flex-direction: column;
-  height: 100%; /* Asegura que las tarjetas tengan la misma altura */
+  transition: transform 0.3s, box-shadow 0.3s;
+  width: 100%;
+  padding: 0;
 }
 
 .property-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  transform: translateY(-3.5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
 }
 
-.property-image-wrapper {
-  position: relative;
-  width: 100%;
-  padding-top: 66.66%; /* 3:2 Aspect Ratio (height / width * 100%) */
-  overflow: hidden;
-}
-
-.property-image-wrapper img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+.property-image {
   object-fit: cover;
+  height: 240px;
+  transition: transform 0.4s ease;
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: none;
 }
 
-.favorite-icon {
+.property-card:hover .property-image {
+  transform: scale(1.02);
+}
+
+.favorite-btn {
   position: absolute;
-  top: 10px;
-  right: 10px;
-  font-size: 1.8em;
-  color: #fff;
-  cursor: pointer;
-  text-shadow: 0 0 5px rgba(0, 0, 0, 0.5); /* Para que resalte sobre la imagen */
-  z-index: 10;
+  top: 15px;
+  right: 15px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  z-index: 5;
+  transition: all 0.2s;
 }
 
-.favorite-icon .bi-heart-fill.text-danger {
-  color: #dc3545 !important; /* Asegura que el color rojo se aplique */
-}
-
-
-.card-body {
-  padding: 15px;
-  flex-grow: 1; /* Permite que el cuerpo ocupe el espacio restante */
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between; /* Para espaciar el contenido */
+.favorite-btn:hover {
+  background-color: #f8f9fa !important;
 }
 
 .card-title {
-  font-size: 1.25rem;
-  margin-bottom: 5px;
-  color: #333;
-}
-
-.card-text {
-  font-size: 0.95rem;
-  color: #666;
-  margin-bottom: 5px;
+  font-weight: 600;
+  font-size: 1.2rem;
 }
 
 .price-box {
-  font-size: 1.3rem;
+  font-size: 1.4rem;
   font-weight: bold;
-  color: #28a745; /* Verde para el precio */
-  margin-top: 10px;
-  margin-bottom: 15px;
+  color: #198754;
 }
 
-.btn-details {
-  background-color: #007bff; /* Azul Bootstrap */
-  color: white;
-  padding: 8px 15px;
-  border-radius: 5px;
-  text-decoration: none;
-  font-size: 0.9rem;
-  transition: background-color 0.2s ease;
+.btn-primary {
+  border-radius: 50px;
+  font-weight: 500;
+  transition: all 0.3s;
 }
 
-.btn-details:hover {
-  background-color: #0056b3;
+.btn-primary:hover {
+  background: linear-gradient(45deg, #0d6efd, #20c997);
+  border-color: transparent;
+}
+
+@media (max-width: 992px) {
+  .property-card {
+    height: 100%;
+  }
+
+  .property-image {
+    height: 200px;
+  }
+
+  .card-title {
+    font-size: 1.1rem;
+  }
+
+  .price-box {
+    font-size: 1.3rem;
+  }
+  
+  .resp {
+    padding-right: 30px;
+  }
+}
+
+/* Responsive móvil */
+@media (max-width: 600px) {
+  .property-card {
+    height: 100%;
+  }
+
+  .property-image {
+    height: 180px;
+  }
+
+  .card-title {
+    font-size: 1rem;
+  }
+
+  .price-box {
+    font-size: 1.2rem;
+  }
+
+  .section-title {
+    font-size: 1.5rem;
+  }  
+
+  .resp {
+    padding-right: 30px;
+  }
 }

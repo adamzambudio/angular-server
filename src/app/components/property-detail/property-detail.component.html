@@ -56,33 +56,65 @@
       <div class="col-lg-4 mt-4 mt-lg-0">
         <div class="contact-form p-4 shadow rounded">
           <h4>Formulario de contacto</h4>
-
           <p style="color: red;">(Datos obligatorios) *</p>
           <br>
-
+      
           <form (ngSubmit)="submitContactForm()" #formRef="ngForm" novalidate>
             <div class="mb-3">
               <label>Nombre: <span style="color: red;">*</span></label>
-              <input type="text" class="form-control" [(ngModel)]="contactForm.nombre" name="nombre" required>
+              <input type="text" class="form-control" [(ngModel)]="contactForm.nombre" name="nombre" required
+                #nombre="ngModel">
+              <div *ngIf="nombre.invalid && nombre.touched" class="text-danger">
+                El nombre es obligatorio.
+              </div>
             </div>
+      
             <div class="mb-3">
               <label>Teléfono: <span style="color: red;">*</span></label>
               <input type="tel" class="form-control" [(ngModel)]="contactForm.telefono" name="telefono" required
-                pattern="[0-9]{9}">
+                pattern="[0-9]{9}" #telefono="ngModel">
+              <div *ngIf="telefono.invalid && telefono.touched" class="text-danger">
+                El teléfono debe tener 9 dígitos numéricos.
+              </div>
             </div>
+      
             <div class="mb-3">
               <label>Email: <span style="color: red;">*</span></label>
-              <input type="email" class="form-control" [(ngModel)]="contactForm.email" name="email" required>
+              <input type="email" class="form-control" [(ngModel)]="contactForm.email" name="email" required email
+                #email="ngModel">
+              <div *ngIf="email.invalid && email.touched" class="text-danger">
+                Introduce un email válido.
+              </div>
             </div>
+      
             <div class="mb-3">
               <label>Mensaje: <span style="color: red;">*</span></label>
-              <textarea class="form-control" rows="4" [(ngModel)]="contactForm.mensaje" name="mensaje"
-                required></textarea>
+              <textarea class="form-control" rows="4" [(ngModel)]="contactForm.mensaje" name="mensaje" required
+                #mensaje="ngModel" placeholder="Escribe tu mensaje aquí"></textarea>
+              <div *ngIf="mensaje.invalid && mensaje.touched" class="text-danger">
+                El mensaje es obligatorio.
+              </div>
             </div>
+      
+            <!-- Casilla de privacidad -->
+            <div class="mb-3 form-check">
+              <input type="checkbox" class="form-check-input" id="privacyPolicy"
+                [(ngModel)]="contactForm.privacyPolicyAccepted" name="privacyPolicy">
+              <label class="form-check-label" for="privacyPolicy">
+                Acepto la <a
+                  href="https://eur-lex.europa.eu/ES/legal-content/summary/general-data-protection-regulation-gdpr.html"
+                  target="_blank">política de privacidad</a>
+              </label>
+              <div *ngIf="showPrivacyError" class="text-danger">
+                Debes aceptar la política de privacidad.
+              </div>
+            </div>
+      
             <button type="submit" class="btn btn-form w-100">Enviar</button>
           </form>
         </div>
       </div>
+
 
 
     </div>

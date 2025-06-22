@@ -25,41 +25,43 @@
     </div>
 
     <!-- Formulario o mensaje de gracias (derecha) -->
-    <div class="col-md-6">
+     <div class="col-md-6">
       <div *ngIf="!formEnviado; else mensajeGracias">
         <h2 class="mb-4">Contacto</h2>
         <p class="text-danger fw-semibold">(Campos obligatorios) *</p>
 
-        <form (ngSubmit)="enviarFormulario()" #form="ngForm">
+        <form [formGroup]="contactForm" (ngSubmit)="enviarFormulario()">
           <div class="mb-3">
-            <label for="nombre" class="form-label">Nombre completo: <span class="text-danger">*</span></label>
-            <input type="text" id="nombre" class="form-control" required name="nombre" [(ngModel)]="datos.nombre">
+            <label for="nombre" class="form-label">Nombre completo: <span style="color: red;">*</span></label>
+            <input type="text" id="nombre" class="form-control" formControlName="nombre">
           </div>
-
+        
           <div class="mb-3">
-            <label for="email" class="form-label">Correo electrónico: <span class="text-danger">*</span></label>
-            <input type="email" id="email" class="form-control" required name="email" [(ngModel)]="datos.email">
+            <label for="email" class="form-label">Correo electrónico: <span style="color: red;">*</span></label>
+            <input type="email" id="email" class="form-control" formControlName="email">
           </div>
-
+        
           <div class="mb-3">
-            <label for="mensaje" class="form-label">Mensaje: <span class="text-danger">*</span></label>
-            <textarea id="mensaje" rows="4" class="form-control" required name="mensaje" [(ngModel)]="datos.mensaje" placeholder="Escribe tu mensaje aquí"></textarea>
+            <label for="mensaje" class="form-label">Mensaje: <span style="color: red;">*</span></label>
+            <textarea id="mensaje" rows="4" class="form-control" formControlName="mensaje" placeholder="Escribe tu mensaje aquí"></textarea>
           </div>
+        
 
           <label class="form-label">Casillas de verificación: <span class="text-danger">*</span></label>
-
+          
           <div class="form-check mb-3">
-            <input class="form-check-input" type="checkbox" id="privacidad" required name="privacidad" [(ngModel)]="datos.privacidad">
+            <input class="form-check-input" type="checkbox" id="privacidad" formControlName="privacidad">
             <label class="form-check-label" for="privacidad">
-              Acepto la <a href="https://eur-lex.europa.eu/ES/legal-content/summary/general-data-protection-regulation-gdpr.html" target="_blank">política de privacidad</a>
+              Acepto la <a
+                href="https://eur-lex.europa.eu/ES/legal-content/summary/general-data-protection-regulation-gdpr.html"
+                target="_blank">política de privacidad</a>
             </label>
           </div>
-
-          <button class="btn btn-danger" type="submit" [disabled]="!form.valid">Enviar</button>
+        
+          <button class="btn" type="submit">Enviar</button>
         </form>
       </div>
 
-      <!-- Tarjeta de agradecimiento -->
       <ng-template #mensajeGracias>
         <div class="card shadow-lg p-4 text-center mt-3">
           <h3 class="text-danger">¡Gracias por contactar con nosotros!</h3>

@@ -26,9 +26,14 @@ property = {
   constructor(private propertyService: PropertyService, private router: Router) {}
 
   onFileChange(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    if (input.files) {
-      this.newImages = Array.from(input.files);
+    const target = event.target as HTMLInputElement;
+    if (target.files) {
+      const files = Array.from(target.files);
+      if (files.length > 20) {
+        alert('No puedes subir más de 20 imágenes.');
+        return;
+      }
+      this.newImages = files;
     }
   }
 
@@ -50,7 +55,7 @@ property = {
 
     // IMPORTANTE: el backend espera 'images' sin corchetes
     this.newImages.forEach(file => {
-      formData.append('images', file);
+      formData.append('images[]', file);
     });
 
     this.propertyService.createPropertyWithImages(formData, token).subscribe({
