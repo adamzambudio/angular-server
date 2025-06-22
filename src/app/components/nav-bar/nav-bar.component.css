@@ -78,3 +78,13 @@ button:hover {
   transform: scale(1.1);
 }
 
+@media (max-width: 992px) {
+  .custom-navbar .navbar-toggler {
+    background-color: transparent !important;
+    box-shadow: none !important;
+  }
+
+  .custom-navbar .navbar-toggler:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+}

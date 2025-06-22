@@ -291,12 +291,15 @@ app-property-filter {
   position: absolute;
   top: 40px;
   right: 0;
+  left: auto;
   background-color: white;
   border-radius: 8px;
   box-shadow: 0 6px 12px rgba(198, 40, 40, 0.25);
   min-width: 160px;
   display: flex;
   flex-direction: column;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   padding: 8px 0;
   user-select: none;
 }
@@ -348,6 +351,15 @@ app-property-filter {
   .resp {
     padding-right: 30px;
   }
+
+  .property-menu {
+    position: absolute;
+    top: 42px; /* justo debajo del botón */
+    left: 0;
+    right: auto;
+    min-width: 100%;
+    z-index: 100;
+  }
 }
 
 
@@ -380,15 +392,15 @@ app-property-filter {
   }
 
   .property-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
     margin-left: 0;
     margin-right: 0;
-    width: 100%;
-    box-sizing: border-box;
-    margin-bottom: 60px;
   }
 
   .card-body {
-    padding-bottom: 0;
+    flex-grow: 1;
   }
 
   .price-box {
@@ -396,9 +408,18 @@ app-property-filter {
   }
 
   .btn-details {
-    width: 100%;
-    bottom: -50px;
-    left: 0;
+    position: static;
+    margin-top: auto;
+    border-radius: 0 0 16px 16px;
     padding: 14px 20px;
+  }
+
+  .property-menu {
+    position: absolute;
+    top: 42px; /* justo debajo del botón */
+    left: 0;
+    right: auto;
+    min-width: 100%;
+    z-index: 100;
   }
 }

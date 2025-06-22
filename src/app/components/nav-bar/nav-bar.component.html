@@ -5,38 +5,38 @@
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+    <div class="collapse navbar-collapse justify-content-center" id="navbarNav" #navbarCollapse>
       <ul class="navbar-nav align-items-center gap-3">
         <li class="nav-item">
-          <a class="nav-link" routerLink="/">Inicio</a>
+          <a class="nav-link" routerLink="/" (click)="closeNavbar()">Inicio</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/contact">Contacto</a>
+          <a class="nav-link" routerLink="/contact" (click)="closeNavbar()">Contacto</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/about">Sobre Nosotros</a>
+          <a class="nav-link" routerLink="/about" (click)="closeNavbar()">Sobre Nosotros</a>
         </li>
         <li class="nav-item" *ngIf="authService.isLoggedIn() && authService.isAdmin()">
-          <a class="nav-link" routerLink="/propertyAdd">Añadir Propiedad</a>
+          <a class="nav-link" routerLink="/propertyAdd" (click)="closeNavbar()">Añadir Propiedad</a>
         </li>
         <li class="nav-item" *ngIf="authService.isLoggedIn()">
-          <a class="nav-link" routerLink="/favorites" routerLinkActive="active">Favoritos</a>
+          <a class="nav-link" routerLink="/favorites" routerLinkActive="active" (click)="closeNavbar()">Favoritos</a>
         </li>
 
         <!-- 👤 Imagen del usuario al loguearse -->
         <li class="nav-item" *ngIf="authService.isLoggedIn()">
-          <img src="assets/logo_usuario.png" class="avatar" alt="Usuario" title="Perfil" (click)="goToProfile()" />
+          <img src="assets/logo_usuario.png" class="avatar" alt="Usuario" title="Perfil" (click)="goToProfile(); closeNavbar()" />
         </li>
 
         <!-- Botones de sesión -->
         <li *ngIf="!authService.isLoggedIn()">
-          <button (click)="goToLogin()">Iniciar sesión</button>
+          <button (click)="goToLogin(); closeNavbar()">Iniciar sesión</button>
         </li>
         <li *ngIf="!authService.isLoggedIn()">
-          <button (click)="goToRegister()">Crear Cuenta</button>
+          <button (click)="goToRegister(); closeNavbar()">Crear Cuenta</button>
         </li>
         <li *ngIf="authService.isLoggedIn()">
-          <button (click)="logout()">Cerrar Sesión</button>
+          <button (click)="logout(); closeNavbar()">Cerrar Sesión</button>
         </li>
       </ul>
     </div>
