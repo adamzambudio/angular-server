@@ -1,7 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
-
 body {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
 }
 
 .section-title {
@@ -316,7 +314,7 @@ app-property-filter {
   justify-content: center;
   border: none;
   outline: none;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
 }
 
 .menu-item:hover {

@@ -1,5 +1,5 @@
 body {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
 }
 
 .property-title {
@@ -51,7 +51,7 @@ body {
   letter-spacing: 1px;
   padding: 15px;
   text-align: center;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
   width: 100%;  /* para que tome todo el ancho del contenedor */
   box-sizing: border-box;  /* para incluir padding en el ancho */
 }
