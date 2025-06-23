@@ -392,19 +392,19 @@ app-property-filter {
   }
 
   .property-card {
+    height: auto !important;
     display: flex;
     flex-direction: column;
-    height: 100%;
     margin-left: 0;
     margin-right: 0;
   }
 
   .card-body {
-    flex-grow: 1;
+    flex-grow: 0 !important;
   }
 
   .price-box {
-    margin-bottom: 0;
+    margin-top: 0 !important;
   }
 
   .btn-details {
